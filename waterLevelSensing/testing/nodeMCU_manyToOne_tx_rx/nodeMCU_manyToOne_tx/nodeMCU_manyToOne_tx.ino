@@ -1,3 +1,4 @@
+//following test is for two nodeMCUs feeding data to one nodeMCU
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 
@@ -31,11 +32,11 @@ void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus) {
     Serial.println("Delivery fail");
   }
 }
- 
+
 void setup() {
   // Init Serial Monitor
   Serial.begin(115200);
- 
+
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
@@ -44,19 +45,19 @@ void setup() {
   if (esp_now_init() != 0) {
     Serial.println("Error initializing ESP-NOW");
     return;
-  } 
+  }
   // Set ESP-NOW role
   esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
 
   // Once ESPNow is successfully init, we will register for Send CB to
-  // get the status of Trasnmitted packet
+  // get the status of Transmitted packet
   esp_now_register_send_cb(OnDataSent);
-  
+
   // Register peer
   esp_now_add_peer(broadcastAddress, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
 
 }
- 
+
 void loop() {
   if ((millis() - lastTime) > timerDelay) {
     // Set values to send

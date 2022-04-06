@@ -1,3 +1,4 @@
+//following test is for two nodeMCUs feeding data to one nodeMCU
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 
@@ -35,11 +36,11 @@ void OnDataRecv(uint8_t * mac_addr, uint8_t *incomingData, uint8_t len) {
   Serial.printf("y value: %d \n", boardsStruct[myData.id-1].y);
   Serial.println();
 }
- 
+
 void setup() {
   // Initialize Serial Monitor
   Serial.begin(115200);
-  
+
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
@@ -49,7 +50,7 @@ void setup() {
     Serial.println("Error initializing ESP-NOW");
     return;
   }
-  
+
   // Once ESPNow is successfully Init, we will register for recv CB to
   // get recv packer info
   esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
@@ -58,9 +59,11 @@ void setup() {
 
 void loop(){
   // Access the variables for each board
-  /*int board1X = boardsStruct[0].x;
+  int board1X = boardsStruct[0].x;
   int board1Y = boardsStruct[0].y;
   int board2X = boardsStruct[1].x;
   int board2Y = boardsStruct[1].y;
-  */
+
+  Serial.printf("Board1X: %d Board1Y: %d\n", board1X, board1Y);
+  Serial.printf("Board2X: %d Board2Y: %d\n", board2X, board2Y);
 }
