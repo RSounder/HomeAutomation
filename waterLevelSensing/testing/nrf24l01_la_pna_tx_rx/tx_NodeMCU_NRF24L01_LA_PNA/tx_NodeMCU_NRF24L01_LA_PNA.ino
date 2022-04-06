@@ -7,16 +7,16 @@ const char* password = "eachday97";
 
 RH_NRF24 nrf24(2,4);
 
-void setup() 
+void setup()
 {
   Serial.begin(9600);
-  while (!Serial);      
+  while (!Serial);
   if (!nrf24.init())
     Serial.println("initialization failed");
   if (!nrf24.setChannel(1))
     Serial.println("Channel set failed");
   if (!nrf24.setRF(RH_NRF24::DataRate2Mbps, RH_NRF24::TransmitPower0dBm))
-    Serial.println("RF set failed");    
+    Serial.println("RF set failed");
 
    Serial.setDebugOutput(true);
 
@@ -36,7 +36,7 @@ void setup()
   }
   Serial.println("");
 }
- 
+
 void loop()
 {
   Serial.println("Sending data to receiver");

@@ -3,17 +3,17 @@
 LiquidCrystal lcd(2,3, 4, 5, 6, 7);
 
 RH_NRF24 nrf24;
- 
-void setup() 
+
+void setup()
 {
   Serial.begin(9600);
   while (!Serial) ;
   if (!nrf24.init())
-    Serial.println("initialization failed");                           
+    Serial.println("initialization failed");
   if (!nrf24.setChannel(1))
     Serial.println("Channel Set failed");
   if (!nrf24.setRF(RH_NRF24::DataRate2Mbps, RH_NRF24::TransmitPower0dBm))
-    Serial.println("RF set failed");    
+    Serial.println("RF set failed");
 
     lcd.begin(16, 2);
     lcd.setCursor(0, 0);
@@ -24,7 +24,7 @@ void setup()
     delay(1000);
     lcd.clear();
 }
- 
+
 void loop()
 {
   if (nrf24.available())
