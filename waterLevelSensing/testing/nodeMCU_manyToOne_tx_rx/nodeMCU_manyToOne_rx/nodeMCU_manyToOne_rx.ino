@@ -59,11 +59,9 @@ void setup() {
 
 void loop(){
   // Access the variables for each board
-  int board1X = boardsStruct[0].x;
+  /* int board1X = boardsStruct[0].x;
   int board1Y = boardsStruct[0].y;
   int board2X = boardsStruct[1].x;
-  int board2Y = boardsStruct[1].y;
+  int board2Y = boardsStruct[1].y; */
 
-  Serial.printf("Board1X: %d Board1Y: %d\n", board1X, board1Y);
-  Serial.printf("Board2X: %d Board2Y: %d\n", board2X, board2Y);
 }
