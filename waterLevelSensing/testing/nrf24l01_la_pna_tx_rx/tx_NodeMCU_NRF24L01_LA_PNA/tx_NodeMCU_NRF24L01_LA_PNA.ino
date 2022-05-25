@@ -13,15 +13,14 @@ void setup()
   if (!nrf24.setRF(RH_NRF24::DataRate2Mbps, RH_NRF24::TransmitPower0dBm))
     Serial.println("RF set failed");
 
-   Serial.setDebugOutput(true);
 }
 
 void loop()
 {
-  Serial.println("Sending data to receiver");
-  String dataString = "09107600";//String(ctime(&now));
-  uint8_t dataArray[dataString.length()];
-  dataString.getBytes(dataArray,dataString.length());
+  String rawData = "A087B045C099D088E078";
+
+  uint8_t dataArray[rawData.length()];
+  rawData.getBytes(dataArray,rawData.length());
   nrf24.send(dataArray,sizeof(dataArray));
   nrf24.waitPacketSent();
   delay(5000);

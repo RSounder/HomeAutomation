@@ -1,24 +1,27 @@
-#include <SoftwareSerial.h>
 #include <RH_NRF24.h>
+#include <SoftwareSerial.h>
 
-RH_NRF24 nrf24;
-SoftwareSerial espSerial(5, 6); //1,3 node
+SoftwareSerial espSerial(1, 3);
+RH_NRF24 nrf24(2,4);
 String str;
 
-void setup(){
+void setup() 
+{
   Serial.begin(9600);
-  espSerial.begin(9600);
 
   while (!Serial) ;
   if (!nrf24.init())
-    Serial.println("initialization failed");
+    Serial.println("initialization failed");                           
   if (!nrf24.setChannel(1))
     Serial.println("Channel Set failed");
   if (!nrf24.setRF(RH_NRF24::DataRate2Mbps, RH_NRF24::TransmitPower0dBm))
-    Serial.println("RF set failed");
+    Serial.println("RF set failed");    
 
+  espSerial.begin(9600);
   delay(2000);
+
 }
+
 void loop()
 {
   if (nrf24.available())
@@ -29,16 +32,16 @@ void loop()
     {
       Serial.print("Received: ");
       Serial.println((char*)buf);
-      String data=String((char*)buf);
-      espSerial.println(data);
-      delay(1000);
+      String dataStr = String((char*)buf);
+      espSerial.println(dataStr);
     }
     else
     {
       Serial.println("recv failed");
+      espSerial.println("RF Error");
     }
   } else {
-      espSerial.println("TSA075B076C077DLOW"); //test string
-      delay(1000);    
+      espSerial.println("No RF found");
   }
 }
+ 

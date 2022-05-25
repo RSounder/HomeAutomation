@@ -1,5 +1,5 @@
 #include <HCSR04.h>
-HCSR04 hc(13, 12); // Initialize Pin D7, D6
+HCSR04 hc(0, 2); // Initialize Pin D7, D6
 void setup()
 {
   Serial.begin(9600);
